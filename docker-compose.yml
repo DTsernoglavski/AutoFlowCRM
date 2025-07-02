@@ -26,7 +26,7 @@ services:
       - mariadb
       - redis
     volumes:
-      - bench_data:/home/frappe/frappe-bench
+      - ./sites:/home/frappe/frappe-bench/sites
 
   api:
     build: ./backend/api
