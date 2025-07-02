@@ -1,22 +1,23 @@
 version: '3.8'
+
 services:
   mariadb:
     image: mariadb:10.6
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: \${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: frappe
     volumes:
       - db_data:/var/lib/mysql
 
-redis:
+  redis:
     image: redis:6
     restart: always
     volumes:
       - redis_data:/data
 
-frappe:
-    image: frappe/erpnext-worker:version-14
+  frappe:
+    image: frappe/erpnext:v15.21.0
     restart: always
     depends_on:
       - mariadb
@@ -24,31 +25,31 @@ frappe:
     environment:
       SITE_NAME: site.local
       DB_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: \${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./crm/sites:/home/frappe/frappe-bench/sites
 
-api:
+  api:
     build: ./api
     restart: always
     depends_on:
       - redis
     environment:
       REDIS_URL: redis://redis:6379/0
-      DROPBOX_TOKEN: \${DROPBOX_TOKEN}
+      DROPBOX_TOKEN: ${DROPBOX_TOKEN}
     volumes:
       - ./api:/app
     ports:
       - "8000:8000"
 
-worker:
+  worker:
     build: ./worker
     restart: always
     depends_on:
       - redis
     environment:
       REDIS_URL: redis://redis:6379/0
-      DROPBOX_TOKEN: \${DROPBOX_TOKEN}
+      DROPBOX_TOKEN: ${DROPBOX_TOKEN}
     volumes:
       - ./worker:/app
 
