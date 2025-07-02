@@ -1,6 +1,6 @@
 fastapi
-uvicorn
+requests
+celery[redis]
 docxtpl
 pillow
 dropbox
-requests

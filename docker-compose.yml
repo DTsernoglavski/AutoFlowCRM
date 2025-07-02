@@ -3,52 +3,57 @@ version: '3.7'
 services:
   mariadb:
     image: mariadb:10.6
-    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=EYHq098qF1uauT1Lc8uB
+      - MYSQL_ROOT_PASSWORD=yourpassword
     volumes:
       - db_data:/var/lib/mysql
 
-  redis_cache:
+  redis:
     image: redis:6
     restart: always
-    volumes:
-      - redis_cache_data:/data
-
-  redis_queue:
-    image: redis:6
-    restart: always
-    volumes:
-      - redis_queue_data:/data
-
-  redis_socketio:
-    image: redis:6
-    restart: always
-    volumes:
-      - redis_socketio_data:/data
 
   frappe:
     image: frappe/erpnext:v15.21.0
-    restart: always
     ports:
       - "8080:8000"
     environment:
       - SITE_NAME=site.local
       - DB_ROOT_USER=root
-      - MYSQL_ROOT_PASSWORD=EYHq098qF1uauT1Lc8uB
+      - MYSQL_ROOT_PASSWORD=yourpassword
       - ADMIN_PASSWORD=admin123
       - INSTALL_APPS=erpnext
     depends_on:
       - mariadb
-      - redis_cache
-      - redis_queue
-      - redis_socketio
+      - redis
     volumes:
       - bench_data:/home/frappe/frappe-bench
 
+  api:
+    build: ./backend/api
+    environment:
+      - FRAPPE_URL=http://frappe:8000
+      - FRAPPE_USER=Administrator
+      - FRAPPE_PASSWORD=admin123
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - frappe
+      - redis
+
+  worker:
+    build: ./backend/worker
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DROPBOX_TOKEN=PASTE_YOUR_DROPBOX_TOKEN
+    depends_on:
+      - redis
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
 volumes:
   db_data:
-  redis_cache_data:
-  redis_queue_data:
-  redis_socketio_data:
   bench_data:
