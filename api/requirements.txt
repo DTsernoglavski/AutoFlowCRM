@@ -3,3 +3,4 @@ uvicorn
 docxtpl
 pillow
 dropbox
+requests
