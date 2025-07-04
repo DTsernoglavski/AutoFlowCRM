@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+env/
+venv/
+.env
+.venv/
+
+# Logs and temporary files
+pip-log.txt
+pip-delete-this-directory.txt
+*.log
+*.swp
+*.swo
+
+# Testing
+.tox
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+
+# Version control
+.git/
+.gitignore
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Project output
+output/
+*.docx
+
+# Docker files (optional - usually not needed in container)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md

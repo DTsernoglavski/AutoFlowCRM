@@ -1,0 +1,41 @@
+{
+  "admin_form_example": {
+    "user_name": "ivan_petrov",
+    "email_address": "ivan.petrov@company.com",
+    "gender": "male",
+    "phone_number": "+7 999 123-45-67",
+    "employment_type": "full_time",
+    "contract_role": "Senior Developer",
+    "starting_date": "2024-01-15",
+    "salary_before_tax": 150000.00
+  },
+
+  "employee_form_example": {
+    "personal_details": {
+      "first_name": "Иван",
+      "last_name": "Петров",
+      "user_name": "ivan_petrov",
+      "id_number_passport": "1234 567890",
+      "date_of_birth": "1990-05-15",
+      "city": "Москва",
+      "address": "ул. Тверская, д. 1",
+      "apartment_number": "25",
+      "phone_number": "+7 999 123-45-67"
+    },
+    "employment_info": {
+      "contract_role": "Senior Developer",
+      "employment_type": "full_time",
+      "starting_date": "2024-01-15",
+      "salary_before_tax": 150000.00
+    },
+    "bank_details": {
+      "select_region": "Москва",
+      "name_clarification": "Иван Петров",
+      "bank_name": "Сбербанк",
+      "swift": "SABRRUMM",
+      "iban": "RU1234567890123456789012",
+      "payer_agreement_id": "PAY123456789",
+      "country_code": "RU"
+    }
+  }
+}
