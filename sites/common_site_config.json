@@ -1,0 +1,7 @@
+{
+ "db_host": "mariadb",
+ "default_site": "site.local",
+ "redis_cache": "redis://redis:6379",
+ "redis_queue": "redis://redis:6379",
+ "redis_socketio": "redis://redis:6379"
+}

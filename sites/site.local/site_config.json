@@ -1,0 +1,7 @@
+{
+  "db_name": "site.local",
+  "db_password": "123",
+  "db_type": "mariadb",
+  "host_name": "http://5.189.161.210:8080"
+}
+
